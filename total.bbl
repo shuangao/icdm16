@@ -21,6 +21,11 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{ben2010theory}
+S.~Ben-David, J.~Blitzer, K.~Crammer, A.~Kulesza, F.~Pereira, and J.~W.
+  Vaughan, ``A theory of learning from different domains,'' \emph{Machine
+  learning}, vol.~79, no. 1-2, pp. 151--175, 2010.
+
 \bibitem{pan2010survey}
 S.~J. Pan and Q.~Yang, ``A survey on transfer learning,'' \emph{Knowledge and
   Data Engineering, IEEE Transactions on}, vol.~22, no.~10, pp. 1345--1359,
@@ -31,31 +36,24 @@ T.~Tommasi, F.~Orabona, and B.~Caputo, ``Learning categories from few examples
   with multi model knowledge transfer,'' \emph{Pattern Analysis and Machine
   Intelligence, IEEE Transactions on}, vol.~36, no.~5, pp. 928--941, 2014.
 
-\bibitem{fei2006one}
-L.~Fei-Fei, R.~Fergus, and P.~Perona, ``One-shot learning of object
-  categories,'' \emph{Pattern Analysis and Machine Intelligence, IEEE
-  Transactions on}, vol.~28, no.~4, pp. 594--611, 2006.
+\bibitem{kuzborskij2013n}
+I.~Kuzborskij, F.~Orabona, and B.~Caputo, ``From n to n+ 1: Multiclass transfer
+  incremental learning,'' in \emph{Computer Vision and Pattern Recognition
+  (CVPR), 2013 IEEE Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax
+  IEEE, 2013, pp. 3358--3365.
 
 \bibitem{kuzborskij2013stability}
 I.~Kuzborskij and F.~Orabona, ``Stability and hypothesis transfer learning,''
   in \emph{Proceedings of the 30th International Conference on Machine
   Learning}, 2013, pp. 942--950.
 
-\bibitem{ben2010theory}
-S.~Ben-David, J.~Blitzer, K.~Crammer, A.~Kulesza, F.~Pereira, and J.~W.
-  Vaughan, ``A theory of learning from different domains,'' \emph{Machine
-  learning}, vol.~79, no. 1-2, pp. 151--175, 2010.
+\bibitem{bishop2006pattern}
+C.~M. Bishop, ``Pattern recognition,'' \emph{Machine Learning}, 2006.
 
 \bibitem{ben2007analysis}
 S.~Ben-David, J.~Blitzer, K.~Crammer, F.~Pereira \emph{et~al.}, ``Analysis of
   representations for domain adaptation,'' \emph{Advances in neural information
   processing systems}, vol.~19, p. 137, 2007.
-
-\bibitem{kuzborskij2013n}
-I.~Kuzborskij, F.~Orabona, and B.~Caputo, ``From n to n+ 1: Multiclass transfer
-  incremental learning,'' in \emph{Computer Vision and Pattern Recognition
-  (CVPR), 2013 IEEE Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax
-  IEEE, 2013, pp. 3358--3365.
 
 \bibitem{jie2011multiclass}
 L.~Jie, T.~Tommasi, and B.~Caputo, ``Multiclass transfer learning from

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.17)  11 JUN 2016 16:31
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.17)  13 JUN 2016 13:20
 entering extended mode
 **total.tex
 (D:\LaTex_Files\ICDM16\total.tex
@@ -455,19 +455,20 @@ LaTeX Warning: No \author given.
 File: fig/negative.png Graphic file (type png)
  <use fig/negative.png>
 Package pdftex.def Info: fig/negative.png used on input line 11.
-(pdftex.def)             Requested size: 176.53409pt x 134.3767pt.
+(pdftex.def)             Requested size: 141.22511pt x 107.49971pt.
 
-<fig/domain.jpg, id=2, 382.5492pt x 192.84045pt>
-File: fig/domain.jpg Graphic file (type jpg)
- <use fig/domain.jpg>
-Package pdftex.def Info: fig/domain.jpg used on input line 24.
-(pdftex.def)             Requested size: 191.27412pt x 96.41998pt.
- [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
+<fig/domain2.jpg, id=2, 383.18156pt x 193.47281pt>
+File: fig/domain2.jpg Graphic file (type jpg)
+ <use fig/domain2.jpg>
+Package pdftex.def Info: fig/domain2.jpg used on input line 24.
+(pdftex.def)             Requested size: 191.5903pt x 96.73616pt.
+
+[1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
  <D:/LaTex_Files/ICDM16/fig/negative.png>]) (D:\LaTex_Files\ICDM16\gama_works.t
-ex [2 <D:/LaTex_Files/ICDM16/fig/domain.jpg>]) (D:\LaTex_Files\ICDM16\statement
-.tex
+ex [2 <D:/LaTex_Files/ICDM16/fig/domain2.jpg>]) (D:\LaTex_Files\ICDM16\statemen
+t.tex
 <fig/aug2.png, id=19, 676.77844pt x 247.67531pt>
 File: fig/aug2.png Graphic file (type png)
  <use fig/aug2.png>
@@ -552,7 +553,7 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  5115 strings out of 493921
- 77653 string characters out of 3152883
+ 77665 string characters out of 3152883
  288323 words of memory out of 3000000
  8286 multiletter control sequences out of 15000+200000
  44360 words of font info for 89 fonts, out of 3000000 for 9000
@@ -572,7 +573,7 @@ fb><D:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><D:/MiKTeX 2.9/fonts
 /type1/public/amsfonts/cm/cmsy7.pfb><D:/MiKTeX 2.9/fonts/type1/urw/times/utmb8a
 .pfb><D:/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><D:/MiKTeX 2.9/fonts/type
 1/urw/times/utmr8a.pfb><D:/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on total.pdf (10 pages, 600786 bytes).
+Output written on total.pdf (10 pages, 446485 bytes).
 PDF statistics:
  118 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

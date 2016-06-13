@@ -400,10 +400,19 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
+%In transfer learning, domain adaptation tries to exploit the knowledge from a source domain with a plentiful data to help learn a classifier for the target domain with a different distribution and little labeled training data. 
+%Negative transfer could happen when the source and target domain are not related, especially for the multi-class scenario.
+%In this paper, following the framework of \textit{Hypothesis Transfer Learning} (HTL), we propose a method that can safely transfer the knowledge from the source domain to the target and alleviate negative transfer using the LS-SVM in the multi-class scenario. Inspired by previous work, we propose a novel perspective on domain adaptation that can take an insight into the performance of transfer learning by data augmentation. We first augment data in the target domain by adding the auxiliary features using the outputs of the models trained from the source domain. We show that the performance of the target model is greatly affected by the weights (called transfer parameters) of the auxiliary features. To better estimate the transfer parameter, we propose a novel objective function to estimate the transfer parameters for the auxiliary features and alleviate negative transfer.
+%Experiment results show that our method can alleviate negative transfer and outperform other transfer methods in the different scenario.
+
+
 In transfer learning, domain adaptation tries to exploit the knowledge from a source domain with a plentiful data to help learn a classifier for the target domain with a different distribution and little labeled training data. 
-Negative transfer could happen when the source and target domain are not related, especially for the multi-class scenario.
-In this paper, following the framework of \textit{Hypothesis Transfer Learning} (HTL), we propose a method that can safely transfer the knowledge from the source domain to the target and alleviate negative transfer using the LS-SVM in the multi-class scenario. Inspired by previous work, we propose a novel perspective on domain adaptation that can take an insight into the performance of transfer learning by data augmentation. We first augment data in the target domain by adding the auxiliary features using the outputs of the models trained from the source domain. We show that the performance of the target model is greatly affected by the weights (called transfer parameters) of the auxiliary features. To better estimate the transfer parameter, we propose a novel objective function to estimate the transfer parameters for the auxiliary features and alleviate negative transfer.
+In this paper, we investigate this problem under the setting of \textit{Hypothesis Transfer Learning} (HTL) where we can only access the source model instead of the data. In real world application, this scenario is very common due to many reasons such as data credential.
+As reported in \cite{ben2010theory}, negative transfer could happen when the source and target domain are not related, especially for the multi-class scenario. As we are not able to verify the source hypotheses in HTL, negative transfer could be an important issue in HTL.
+In this paper, to study the problem of negative transfer in HTL, we propose a reformulation of HTL using the framework of Feature Augmentation (FA). Specifically, we first augment feature space of the target domain by adding the auxiliary features using the outputs of the models trained from the source domain. With this FA, we find the major theoretic reason that makes previous HTL work suffer from negative transfer, which is the in-proper selection of transfer parameter.
+To better estimate the transfer parameter, we propose a novel objective function to learn the better transfer parameter.
 Experiment results show that our method can alleviate negative transfer and outperform other transfer methods in the different scenario.
+
 \end{abstract}
 
 % no keywords
