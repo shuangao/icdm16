@@ -28,7 +28,7 @@ The optimal solution to problem (\ref{eq:opt}) is:
 \end{equation}
 It is obviously that once we can determine the values of the weights $\beta$, we can solve the optimization problem \eqref{eq:opt}.
 
-\subsection{Data Augumentation in HTL}
+\subsection{Feature Augumentation in HTL}
 We can interpret Eq. \eqref{eq:solu} in the following way. Let $w''_n=\sum\limits_i^l {{\alpha _{in}}{\phi(x_i)}}$, we have $w_{n} = w_{n}''+\sum\limits{\beta _kw'_k}$. Therefore, for the target binary classifier $f_n(x)$, we have:
 \begin{equation}\label{eq:aug_pre}
 \begin{aligned}
@@ -41,7 +41,7 @@ f_n(x)&=w_{n}''\phi(x)+\sum\limits_k^N{\beta _kw'_k\phi(x)}+b_n\\
 \includegraphics[scale=0.7]{fig/aug2.png}
 \caption{The transfer learning process can be considered as the augmentation of the target data where the decision scores of the source models are appended as the auxiliary features. The transfer parameters can be considered as the a part of the corresponding hyperplane. We can consider 2 augmentation strategies: multi-adaptation and single-adaptation.}\label{fig:aug}
 \end{figure*}
-Here, we call the weight $\beta_k$ the transfer parameter. From Eq. \eqref{eq:aug} we can see that the decision of each target binary classifier is made by combining the decision from target task $w_{n}''\phi(x)$ and the decision scores of the source model. The transfer parameters here is to control the amount of the knowledge transferred from the source models.
+Here, we call the weight $\beta_k$ the transfer parameter. From Eq. \eqref{eq:aug} we can see that the decision of each target binary classifier is made by combining the decision from target task $w_{n}''\phi(x)$ and the decision scores of the source model. The transfer parameter here is to control the amount of the knowledge transferred from the source model.
 
 We can rewrite Eq. \eqref{eq:aug_pre} as:
 \begin{equation}\label{eq:aug}
