@@ -340,7 +340,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Safety Multiclass Transfer Learning}
+\title{Safe Multiclass Transfer Learning}
 
 
 % author names and affiliations
@@ -402,8 +402,8 @@
 \begin{abstract}
 In transfer learning, domain adaptation tries to exploit the knowledge from a source domain with a plentiful data to help learn a classifier for the target domain with a different distribution and little labeled training data. 
 Negative transfer could happen when the source and target domain are not related, especially for the multi-class scenario.
-In this paper, following the framework of \textit{Hypothesis Transfer Learning} (HTL), we propose a method that can safely transfer the knowledge from the source domain to the target and alleviate negative transfer using the LS-SVM in the multi-class scenario. Inspired by previous work, we first augment data in the target domain by adding the auxiliary features using the outputs of the models trained from the source domain. We show that the performance of the target model is greatly affected by the weights (called transfer parameters) of the auxiliary features. To better estimate the transfer parameter, we propose a novel objective function to estimate the transfer parameters for the auxiliary features and alleviate negative transfer.
-Experiment results show that our method can alleviate negative transfer and outperform other transfer methods in different scenario.
+In this paper, following the framework of \textit{Hypothesis Transfer Learning} (HTL), we propose a method that can safely transfer the knowledge from the source domain to the target and alleviate negative transfer using the LS-SVM in the multi-class scenario. Inspired by previous work, we propose a novel perspective on domain adaptation that can take an insight into the performance of transfer learning by data augmentation. We first augment data in the target domain by adding the auxiliary features using the outputs of the models trained from the source domain. We show that the performance of the target model is greatly affected by the weights (called transfer parameters) of the auxiliary features. To better estimate the transfer parameter, we propose a novel objective function to estimate the transfer parameters for the auxiliary features and alleviate negative transfer.
+Experiment results show that our method can alleviate negative transfer and outperform other transfer methods in the different scenario.
 \end{abstract}
 
 % no keywords
@@ -427,20 +427,25 @@ Experiment results show that our method can alleviate negative transfer and outp
 \section{Related Work}\label{sec:work}
 \input{gama_works.tex}
 
-\section{Insight into negative transfer}\label{sec:prob}
+\section{Transfer knowledge with data augmentation}\label{sec:prob}
 \input{statement.tex}
 
 \section{SMTLe}\label{sec:smitle}
-%\input{smitle.tex}
+\input{smitle.tex}
 
 \section{Experiment}\label{sec:exp}
-%\input{gama_exp.tex}
+\input{gama_exp.tex}
 
 \section{Conclusion}
-%\input{gama_con.tex}
+\input{gama_con.tex}
+% use section* for acknowledgment
+\section*{Acknowledgment}
 
-%\appendices
-%\input{appd}
+
+The authors would like to thank...
+
+\appendices
+\input{appd}
 
 \bibliographystyle{IEEEtran}
 \bibliography{research}
@@ -547,11 +552,7 @@ Experiment results show that our method can alleviate negative transfer and outp
 % conference papers do not normally have an appendix
 
 
-% use section* for acknowledgment
-\section*{Acknowledgment}
 
-
-The authors would like to thank...
 
 
 

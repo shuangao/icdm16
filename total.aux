@@ -36,7 +36,9 @@
 \citation{tommasi2010safety}
 \citation{cawley2006leave}
 \citation{tommasi2014learning}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Insight into negative transfer}{3}}
+\citation{tommasi2014learning}
+\citation{kuzborskij2013n}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Transfer knowledge with data augmentation}{3}}
 \newlabel{sec:prob}{{III}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Biased regularization in HTL}{3}}
 \newlabel{eq:svm_obj}{{1}{3}}
@@ -47,28 +49,82 @@
 \newlabel{eq:aug}{{5}{3}}
 \citation{vapnik1999overview}
 \citation{suykens1999least}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The transfer learning process can be considered as the augmentation of the target data where the decision scores of the source models are appended as the auxiliary features. The transfer parameters can be considered as the a part of the corresponding hyperplane. We can consider 2 augmentation strategies: multi-adaptation and single-adaptation.\relax }}{4}}
+\newlabel{fig:aug}{{3}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Reasons for negative transfer}{4}}
+\newlabel{eq:srm}{{6}{4}}
+\citation{kuzborskij2013stability}
+\citation{elisseeff2003leave}
+\citation{cawley2006leave}
+\citation{crammer2002algorithmic}
+\citation{BoydCO}
+\citation{lampert2009learning}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}SMTLe}{5}}
+\newlabel{sec:smitle}{{IV}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Multiclass Prediction Loss with Leave-One-Out}{5}}
+\newlabel{eq:linear}{{7}{5}}
+\newlabel{eq:loo}{{8}{5}}
+\newlabel{eq:solution}{{10}{5}}
+\newlabel{eq:train_loss}{{11}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Loss Function of SMTLe}{5}}
+\newlabel{eq:loss}{{12}{5}}
+\newlabel{eq:dual}{{13}{5}}
+\citation{lecun1998gradient}
+\citation{hull1994database}
+\citation{jie2011multiclass}
+\citation{tommasi2014learning}
+\citation{aytar2011tabula}
+\citation{kuzborskij2013n}
+\citation{tommasi2014learning}
+\citation{gehler2009feature}
+\newlabel{alg:1}{{\caption@xref {alg:1}{ on input line 1}}{6}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces SMITLe\relax }}{6}}
+\newlabel{alg:1}{{1}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Experiment}{6}}
+\newlabel{sec:exp}{{V}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Dataset}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Baseline methods and experiment setup}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-C}}Experiment result \& analysis}{6}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Experiment results on 5 examples per class in target training set. We show the percentage of accuracy across the 10 classes on different noise level. We use "*" to denote the results suffer from negative transfer\relax }}{7}}
+\newlabel{tab:rs}{{I}{7}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {Results on MNIST}}}{7}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {Results on USPS}}}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces We add the noise to the source data to generate the source domain with different relatedness to the target domain. From the images we can see that the source domain is still related to the target domain in different level of the noise rate\relax }}{7}}
+\newlabel{fig:noise}{{4}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{7}}
+\citation{rockafellar2015convex}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces More results on MNIST\relax }}{8}}
+\newlabel{tab:mnist}{{II}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {10 examples per class}}}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {15 examples per class}}}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(c)}{\ignorespaces {20 examples per class}}}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(d)}{\ignorespaces {25 examples per class}}}{8}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces More results on USPS\relax }}{8}}
+\newlabel{tab:usps}{{III}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {10 examples per class}}}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {15 examples per class}}}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(c)}{\ignorespaces {20 examples per class}}}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(d)}{\ignorespaces {25 examples per class}}}{8}}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  A: Convergence Analysis}{8}}
+\newlabel{appd:convg}{{A}{8}}
+\newlabel{eq:app:strong}{{15}{8}}
 \bibstyle{IEEEtran}
 \bibdata{research}
 \bibcite{pan2010survey}{1}
 \bibcite{tommasi2014learning}{2}
+\newlabel{eq:app:inner}{{16}{9}}
+\newlabel{eq:app:squrediff}{{17}{9}}
+\newlabel{eq:app:it_diff}{{18}{9}}
+\newlabel{eq:app:difsum}{{20}{9}}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  B: Proof of avoiding negative transfer}{9}}
+\newlabel{appd:proof}{{B}{9}}
+\newlabel{eq:opt_beta}{{23}{9}}
+\newlabel{eq:link1}{{24}{9}}
 \bibcite{fei2006one}{3}
 \bibcite{kuzborskij2013stability}{4}
 \bibcite{ben2010theory}{5}
 \bibcite{ben2007analysis}{6}
 \bibcite{kuzborskij2013n}{7}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The transfer learning process can be considered as the augmentation of the target data where the decision scores of the source models are appended as the auxiliary features. The transfer parameters can be considered as the a part of the corresponding hyperplane.\relax }}{4}}
-\newlabel{fig:aug}{{3}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Reasons for negative transfer}{4}}
-\newlabel{eq:srm}{{6}{4}}
-\newlabel{eq:asvm}{{7}{4}}
-\newlabel{eq:linear}{{8}{4}}
-\newlabel{eq:solution}{{10}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}SMTLe}{4}}
-\newlabel{sec:smitle}{{IV}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Experiment}{4}}
-\newlabel{sec:exp}{{V}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{4}}
-\@writefile{toc}{\contentsline {section}{References}{4}}
 \bibcite{jie2011multiclass}{8}
 \bibcite{Lu201514}{9}
 \bibcite{lim2012transfer}{10}
@@ -82,3 +138,12 @@
 \bibcite{cawley2006leave}{18}
 \bibcite{vapnik1999overview}{19}
 \bibcite{suykens1999least}{20}
+\bibcite{elisseeff2003leave}{21}
+\bibcite{crammer2002algorithmic}{22}
+\bibcite{BoydCO}{23}
+\bibcite{lampert2009learning}{24}
+\bibcite{lecun1998gradient}{25}
+\bibcite{hull1994database}{26}
+\bibcite{gehler2009feature}{27}
+\bibcite{rockafellar2015convex}{28}
+\@writefile{toc}{\contentsline {section}{References}{10}}

@@ -36,7 +36,11 @@ f_n(x)&=w_{n}''\phi(x)+\sum\limits_k^N{\beta _kw'_k\phi(x)}+b_n\\
 &=w_{n}''\phi(x)+(b_n-\sum\limits_k^N{\beta _kb_k})+\sum\limits_k^N{\beta _kf'_k(x)}
 \end{aligned}
 \end{equation}
-
+\begin{figure*}
+\centering
+\includegraphics[scale=0.7]{fig/aug2.png}
+\caption{The transfer learning process can be considered as the augmentation of the target data where the decision scores of the source models are appended as the auxiliary features. The transfer parameters can be considered as the a part of the corresponding hyperplane. We can consider 2 augmentation strategies: multi-adaptation and single-adaptation.}\label{fig:aug}
+\end{figure*}
 Here, we call the weight $\beta_k$ the transfer parameter. From Eq. \eqref{eq:aug} we can see that the decision of each target binary classifier is made by combining the decision from target task $w_{n}''\phi(x)$ and the decision scores of the source model. The transfer parameters here is to control the amount of the knowledge transferred from the source models.
 
 We can rewrite Eq. \eqref{eq:aug_pre} as:
@@ -45,80 +49,20 @@ We can rewrite Eq. \eqref{eq:aug_pre} as:
 f_n(x)&= [w_{n}'',\beta_1,...,\beta_N][\phi(x),f'_1(x),...,f'_N(x)]^T\\&+(b_n-\sum\limits_k^N{\beta _kb_k})
 \end{aligned}
 \end{equation}
-Here, we propose a novel insight to the transfer problem. From Eq. \eqref{eq:aug}, we can see that solving the optimization problem \eqref{eq:opt} is equivalent to find the optimal hyperplane $\hat{w}=[w_{n}'',\beta_1,...,\beta_N]$ for the augmented data $\hat{x}=[\phi(x),f'_1(x),...,f'_N(x)]$. Moreover, we can see that because the auxiliary features comes from the decision scores of the source models, we can greatly extend the choice of the source model. We can exploit the knowledge of any source model that can output the decision score of a example.
+Here, we propose a novel insight to the transfer problem. From Eq. \eqref{eq:aug}, we can see that solving the optimization problem \eqref{eq:opt} is equivalent to find the optimal hyperplane $\hat{w}=[w_{n}'',\beta_1,...,\beta_N]$ for the augmented data $\hat{x}=[\phi(x),f'_1(x),...,f'_N(x)]$. An intuitive interpretation of the auxiliary feature is that it can be considered as a similarity score from the source model. When the target model decides whether an object belongs to certain category, it also weight the decisions of the source model as the reference.
+Moreover, we can see that because the auxiliary features come from the decision scores of the source models, we can greatly extend the choice of the types of the source classifier. We can exploit the knowledge of any source model that can output the decision score of an example while previous methods are limited to SVMs \cite{tommasi2014learning} \cite{kuzborskij2013n}. When there are multiple source models, we can choose multiple sources (multi-source adaptation) or the best source (single-source) to augment the original data (see Figure \ref{fig:aug}).
 
-\begin{figure}
-\centering
-\includegraphics[scale=0.4]{fig/auguement.png}
-\caption{The transfer learning process can be considered as the augmentation of the target data where the decision scores of the source models are appended as the auxiliary features. The transfer parameters can be considered as the a part of the corresponding hyperplane.}\label{fig:aug}
-\end{figure}
+
 
 \subsection{Reasons for negative transfer}
 From the perspective of the data augmentation, we can turn the problem of domain adaptation problem with HTL into a traditional learning problem, i.e. find the optimal values for the elements of the hyperplane hyperplane $\hat{w}=[w_{n}'',\beta_1,...,\beta_N]$. According to the principle of Structural Risk Minimization (SRM) \cite{vapnik1999overview}, the risk of a linear classifier $f(x)=wx+b$ on the unseen test data $R(f)$ (generalization risk) is bounded by:
 \begin{equation}\label{eq:srm}
 R(f) \le {R_{emp}}(f) + \sqrt {\frac{{h(\ln (2l/h) + 1) + \ln (\delta /4)}}{l}} 
 \end{equation}
-Here the first part on the right-hand side of the inequation ${R_{emp}}(f)$ is the empirical risk (training error) of the classifier and the second part is the confidence interval. $h$ and $l$ denote the VC dimension and number of training data of the classifier respectively and $\delta$ is the confidential parameter. According to \cite{suykens1999least}, the VC dimension $h$ is bounded by $h \le \min([||w||^2R^2],l)+1$ where $R$ is the radium of the smallest ball containing data $x$ and $||w||$ is the \textit{2-norm} of the hyperplane.
+Here the first part on the right-hand side of the inequation ${R_{emp}}(f)$ is the empirical risk (training error) of the classifier and the second part is the confidence interval. $h$ and $l$ denote the VC dimension and number of training data of the classifier respectively and $\delta$ is the confidential parameter. According to \cite{suykens1999least}, the VC dimension $h$ is bounded by $h \le \min([||w||^2R^2],l)+1$ where $R$ is the radius of the smallest ball containing data $x$ and $||w||$ is the \textit{2-norm} of the hyperplane.
 
-As we discussed above, we use the outputs of the source models as the auxiliary features to augment the target data. Let $R$ and $\hat{R}$ denote the radiums of the data before and after augmentation. We should have $R^2 \le \hat{R}^2$ and $||w||^2\le ||\hat{w}||^2$. This indicate that the VC dimension of the target model trained on the augmented data (augmented model) tends to increase compared to the model trained from the original data, i.e. method without transferring any source knowledge (no transfer model). As a result, data augmentation eventually increases the confidence interval of the risk of the augmented model. When the augmented model failed to decrease the empirical risk, its performance would degrade, i.e. suffer from negative transfer. For example, when the auxiliary features can't provide any extra useful information for classification, i.e. the source domain and target domain are unrelated, negative transfer could happen. In contrast, if we can significantly decrease the empirical risk of the augmented model, we can decrease its generalization risk and get improved performance, i.e. positive transfer.
+As we discussed above, we use the outputs of the source models as the auxiliary features to augment the target data. Let $R$ and $\hat{R}$ denote the radius of the data before and after augmentation. We should have $R^2 \le \hat{R}^2$ and $||w||^2\le ||\hat{w}||^2$. This indicates that the VC dimension of the target model trained on the augmented data (augmented model) tends to increase compared to the model trained from the original data, i.e.  the method without transferring any source knowledge (no transfer model). As a result, data augmentation eventually increases the confidence interval of the risk of the augmented model. When the augmented model failed to decrease the empirical risk, its performance would degrade, i.e. suffer from negative transfer. For example, when the auxiliary features can't provide any extra useful information for classification, i.e. the source domain and target domain are unrelated, negative transfer could happen. In contrast, if we can significantly decrease the empirical risk of the augmented model, we can decrease its generalization risk and get improved performance, i.e. positive transfer.
 
-
-However, for the original $N$ categories, we already have their corresponding source category hypotheses and thus, their regularization term can be written as:
-\begin{equation}\label{eq:asvm}
-\begin{aligned}
-R(w_n,w_n')= \frac{1}{2}{{{\left\| {{w_n} - {\gamma _n}{{w'}_n}} \right\|}^2}}  
-\end{aligned}
-\end{equation}
-As we can see that the regularization term \eqref{eq:asvm} is a special case of \eqref{eq:multi} where only one $\beta_k$ is none-zero. 
-
-Combining these two together, our multi-class incremental transfer problem can be solved by optimizing the following objective function:
-%\begin{equation}
-%\begin{aligned}
-%\textbf{min}\qquad {} & \frac{1}{2}\sum\limits_{n = 1}^N {{{\left\| {{w_n} - {\gamma _n}{{w'}_n}} \right\|}^2}}  + \frac{1}{2}{\left\| {{w_{N + 1}} - \sum\limits_{k = 1}^N {w{'_k}{\beta _k}} } \right\|^2}\\& +\frac{C}{2}\sum\limits_{n = 1}^{N + 1} {\sum\limits_{i = 1}^l {e_{i,n}^2} }  \\
-%\textbf{s.t.}\qquad {} &{e_{i,n}} = {Y_{in}} - \phi ({x_i}){w_n} - {b_n}, \quad n \in \{1,...,N+1\}
-%\end{aligned}\label{eq:opt}
-%\end{equation}
-
-%The optimal solution to  Eq. (\ref{eq:opt}) is:
-%\begin{equation}\label{eq:solu}
-%\begin{aligned}
-%{w_n}&= {\gamma _n}{{w'}_n} + \sum\limits_i^l {{\alpha _{in}}{\phi(x_i)}} ,{n = 1,...,N}\\
-%{w_{N + 1}}&= \sum\limits_k^N {{\beta _k}{{w'}_k}}  + \sum\limits_i^l {{\alpha _{i(N + 1)}}{\phi(x_i)}} 
-%\end{aligned}
-%\end{equation}
-%Here $\alpha_{ij}$ is the element $(i,j)$ in $\boldsymbol{\alpha}$. 
-
-Let $K(X,X)$ be the kernel matrix and
-\begin{equation}\label{eq:linear}
-\psi=\left[ {\begin{array}{*{20}{c}}
-{K(X,X) + \frac{1}{C}{\rm{I}}}&\mathbf{1}\\
-\mathbf{1^T}&0
-\end{array}} \right]
-\end{equation}
-
-\begin{equation}
-\begin{array}{c}
- {\psi}\left[ {\begin{array}{*{20}{c}}
-{\boldsymbol{\alpha} '}\\
-{\boldsymbol{b}'}
-\end{array}} \right] = \left[ {\begin{array}{*{20}{c}}
-Y\\
-0
-\end{array}} \right], \quad
-{\psi}\left[ {\begin{array}{*{20}{c}}
-{\boldsymbol{\alpha} ''}\\
-{\boldsymbol{b}''}
-\end{array}} \right] = \left[ {\begin{array}{*{20}{c}}
-{X{{\left( {W'} \right)}^T}}\\
-0
-\end{array}} \right]
-\end{array}
-\end{equation}
-We have:
-\begin{equation}\label{eq:solution}
- \boldsymbol{\alpha}  = \boldsymbol{\alpha} ' - \left[ {\begin{array}{*{20}{c}}
- {\boldsymbol{\alpha} ''\boldsymbol{d_{\gamma}}}&{{\boldsymbol{\alpha} ''\boldsymbol{\beta ^T}}}
- \end{array}} \right]
-\end{equation}
-Here $\boldsymbol{d_{\gamma}}$ is a diagonal matrix with $\{\gamma_i\}_{i=1,...,N}$ in its main diagonal. From Eq. (\ref{eq:solution}) we can see that, the solution of Eq. (\ref{eq:opt}) is completed once $\boldsymbol{\gamma}$ and $\boldsymbol{\beta}$ are set.
+From the analysis above, we can see that in order to get improved performance and alleviate negative transfer, we have to carefully control the value of the transfer parameters. A naive method to estimate the hyperplane $\hat{w}$ for the target model could be following the idea of optimizing problem \eqref{eq:svm_obj} to minimize the training error of $f(x)=\hat{w}\hat{x}+b$ directly. However, if we are not able to regularize the transfer parameters properly, the target model could easily suffer from negative transfer when the source and target are weakly related (see the experiments in Section sec:exp).
+In next section, we introduce our method SMTLe to estimate the transfer parameters that can improve the performance of the target model and alleviate negative transfer .
 

@@ -1,16 +1,19 @@
-In this section, we show empirical results of our algorithm on different transferring situations on two datasets: AwA10\footnote{The features of AwA dataset is available from http://attributes.kyb.tuebingen.mpg.de/} \cite{lampert2009learning} and Caltech10\footnote{Images for Caltech is available from http://www.vision.caltech.edu/Image\_Datasets/Caltech256/} \cite{griffin2007caltech}. In real world applications, there are three situations in HTL. The first two extreme cases are all the hypotheses are correct/incorrect. The third one is the intermediate (mixed) case where only part of the hypotheses are correct. We design three sets of experiment, called positive, negative and mixed transfer experiment respectively, based on these 3 situations, comparing our algorithm with the baselines.
+In this section, we show empirical results of our algorithm on different transferring situations on two image benchmark datasets: MNIST\footnote{http://yann.lecun.com/exdb/mnist/} \cite{lampert2009learning} and USPS\footnote{http://www.cs.nyu.edu/~roweis/data.html}. We test the performance of our algorithm in different scenarios and show that SMTLe can outperform the other baseline transfer methods when the source and target domains are related and alleviate negative transfer while other baseline methods suffer.
 \subsection{Dataset}
-Caltch10 is a subset of Caltech256. We select the following 10 categories: \textit{bat, bear, dolphin, giraffe, gorilla, horse, leopard, raccoon, skunk, zebra}, containing 1387 images, as our dataset.
-AwA10 is a subset of AwA dataset. We choose the identical 10 categories as those in Caltech10 from it, containing 6917 images.
+The MNIST database \cite{lecun1998gradient} (Mixed National Institute of Standards and Technology database) is a large database of handwritten digits that is commonly used for training various image processing systems. The database is also widely used for training and testing in the field of machine learning. It was created by "re-mixing" the samples from NIST's original datasets. The creators felt that since NIST's training dataset was taken from American Census Bureau employees, while the testing dataset was taken from American high school students, NIST's complete dataset was too hard. Furthermore, the black and white images from NIST were normalized to fit into a 28x28 pixel bounding box and anti-aliased, which introduced grayscale levels. In our experiment, we use a sub-set of MNIST dataset, containing 6,000 examples for 10 classes (from digit 0 to 9). We also use another handwritten digital dataset USPS \cite{hull1994database}. USPS contains 11,000 images and the data is evenly distributed among 10 classes, i.e. 1,100 examples for each digit. Each digit is represented as a 16x16 greyscale image.
+ 
+For each of the datasets, we randomly split them into 3 sets: the large source dataset (100 examples per class for both dataset) to train the source models, the small target training set (5/10/15/20/25 examples per class for both datasets) to train target model and the large target testset (4700 and 9700 examples for MNIST and USPS respectively) to evaluate the performance of the target model.
 
-\subsection{Baselines and algorithmic setup}
+\subsection{Baseline methods and experiment setup}
 We compare our algorithm with two kinds of baselines. The first one is methods without leveraging any prior knowledge (no transfer baselines). The second consists of some methods with transfer techniques. 
 
-We select 3 no transfer baselines:
-\textbf{No transfer:} LS-SVM trained only on target data. Any transfer algorithm that performs worse than it suffers from negative transfer. \textbf{Batch:} We combined the source and target data, assuming that we have full access to all data, to train the LS-SVM. The result of this baseline might be considered as the best performance achieved when the hypotheses are correct. We only perform this baseline in positive transfer experiment. \textbf{Source+1:} This method only train a new binary LS-SVM for the new category. For the rest of the classes, we use the predictions of the classifiers trained from source data directly. Its performance indicates the correctness of the hypotheses.
+We select 2 no transfer baselines:
+\textbf{No transfer (NT):} LS-SVM trained only on target data. Any transfer algorithm that performs worse than it suffers from negative transfer. \textbf{Batch:} We combined the source and target data, assuming that we have full access to all data, to train the LS-SVM. The result of this baseline might be considered as the best performance achieved when no noise is added to the source data.
 
 
-We select the 3 HTL methods, {MKTL \cite{jie2011multiclass}}, {MULTI-KT \cite{tommasi2014learning}} and MULTIpLE \cite{kuzborskij2013n}, as our transfer baselines.
+We select the 3 HTL baseline methods, \textbf{MKTL \cite{jie2011multiclass}}, \textbf{Multi-KT \cite{tommasi2014learning}}, \textbf{PMT-SVM} \cite{aytar2011tabula} as our transfer baselines. In Multi-KT, there are 3 different strategies, Weighted Multi-KT, Single-KT and Average-KT. We use all the 3 strategies in our experiments and denote them as MKT\_m, MKT\_s and MKT\_a respectively. For PMT-SVM, we use grid search on $\{0.1,0.2,...,1\}$ for the weights of its projection matrix and report the best performance.
+Also, we include the method (Feature+) discussed in Section \ref{sec:prob} which solve the hyperplane $\hat{w}$ directly. 
+For our method SMTLe, we implement 2 adaptation strategies single-adaptation (SMTLe\_s) and multi-adaptation (SMTLe\_m). For SMTLe\_s, we choose the model that distinguishes the corresponding class in the source, i.e. choose the model to distinguish the class digit 1 in the source as the single source model for target binary model of the class digit 1. For SMTLe\_m, we choose all the source models for each target binary model.
 
 %\textbf{MKTL \cite{jie2011multiclass}:} This method uses the output of source models as extra feature inputs and automatically determine from which source models to transfer and how much to transfer.
 
@@ -19,148 +22,60 @@ We select the 3 HTL methods, {MKTL \cite{jie2011multiclass}}, {MULTI-KT \cite{to
 
 %\textbf{MULTIpLE \cite{kuzborskij2013n}:} The basic setting of this method is similar to ours. It is designed to balance the performance between learning the new category and preserving the model from prior knowledge.
 
-For all the experiments in this section, we adopt the same strategy as \cite{kuzborskij2013n} and \cite{tommasi2014learning}, using kernel averaging \cite{gehler2009feature} to compute the average of RBF kernels over the available features on RBF hyperparameter $\{2^{-5},2^{-4},...,2^8\}$. The penalty parameter $C$ is tuned via cross-validation on $\{10^{-5},10^{-4},...,10^8\}$ and the optimal value is reused for all the algorithms.
-Two transfer regularization parameters $\lambda1$ and $\lambda2$ are also set via cross-validation on $\{10^{-3},10^{-2},...,10\}$ respectively.
+For all the experiments in this section, we adopt the same strategy as \cite{kuzborskij2013n} and \cite{tommasi2014learning}, using kernel averaging \cite{gehler2009feature} to compute the average of RBF kernels on RBF hyperparameter $\{2^{-5},2^{-4},...,2^8\}$. The penalty parameter $C$ is tuned via cross-validation on $\{10^{-5},10^{-4},...,10^8\}$ and the optimal value is reused for all the algorithms.
+The transfer regularization parameter $\lambda$ in SMTLe is also set via cross-validation on $\{10^{-3},10^{-2},...,10\}$ respectively.
 
-\subsection{Positive transfer: transferring from correct hypotheses}
-In the extreme case, where the hypotheses are correct, the data of the source and target tasks should be drawn from the same distribution. Thus, we perform two experiments under this setting on both AwA and Caltech. For each dataset, we split the data into two sets. One is treated as the source dataset to train the source hypotheses and another is treated as the target dataset for training and testing. We iteratively choose one category as the new category and run the experiment 10 times. Due to space constraint, we only report the average results of the two experiments in Table \ref{tab:C2C} and Table \ref{tab:A2A}. From the results, we can see that SMITLe can achieve high classification accuracy than other baselines in most of the cases.
-%in Caltech experiment, our algorithm consistently outperforms all the baselines (even better than Batch method). In AwA dataset, Source+1 outperforms SMITLe when the training size is 5. As we increase the training size, the accuracy of SMITLe increases and outperforms Source+1.
-
-To illustrate the detail performance of our algorithm, we select the experiment result on AwA dataset where the horse is chosen as the new category for further explanation. %In Figure \ref{fig:awa-a}, we show the average performances of different methods on different training size for 10 experiments. We can observe that, as the training size increases, our method can even outperform the batch method.
-In Figure \ref{fig:awa} we provide values of $\gamma$ and $\beta$ compared with the parameters of the runner-up transfer algorithm MULTIpLE. We can see that for transfer knowledge between identical categories, MULTIpLE fixes the transfer parameter ($\gamma$) to be 1 while our method sets greater weights for related prior knowledge. By exploiting the positive prior knowledge more aggressively, SMITLe is able to leverage the prior knowledge and outperforms other methods. For the transfer parameter $\beta$ we can see that MULTIpLE tends to keep $\beta$ greater than 0 and SMITLe works more intuitively, setting the positive weight for related categories(giraffe, zebra, and bear etc.) and small or even negative weight for unrelated categories (bat, dolphin, and skunk etc.).
-
+To generate difference source models with different relatedness to the target domain. We add the different level of the noise to the source training data and train the source models from the noisy source data. When there is no noise added to the source data, the source and target domain are identical (strongly related). As we add more noise, the distribution of the data in source and target domain become more different, i.e. the source and target domain become less related (see Figure \ref{fig:noise}).
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.25]{fig/A2A_gama.eps} %\label{fig:awa-b}
-\caption{Experiment results for 10 classes, AwA. Horse is used as the new category. We can see that SMITLe tends to more aggressively exploit the related prior knowledge.}
-\label{fig:awa}
+\includegraphics[scale=0.45]{fig/noise.png}
+\caption{We add the noise to the source data to generate the source domain with different relatedness to the target domain. From the images we  can see that the source domain is still related to the target domain in different level of the noise rate}\label{fig:noise}
 \end{figure}
 
+\subsection{Experiment result \& analysis}
+\begin{table*}[htbp]
+   \subfloat[Results on MNIST]{\resizebox{0.5\textwidth}{!}{
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+     \hline 
+      & \multicolumn{7}{c|}{Noise Level} \\ \hline
+     & 0.0 & 0.2 & 0.3 & 0.5 & 0.8 & 0.9 & 1.0\\ \hline
+      SMTLe\_s & \textbf{87.23} & \textbf{86.40} & \textbf{85.81} & \textbf{84.63} & \textbf{81.51} & \textbf{79.67} & \textbf{78.10}\\ 
+      SMTLe\_m & 82.94 & 80.20 & 79.05 & 76.56 & 72.10 & 69.57 & 68.09\\ 
+      MKT\_{m} & 61.96* & 57.14* & 55.18* & 50.67* & 45.16* & 43.72* & 42.73*\\ 
+      MKT\_{s} & 86.63 & 82.33 & 79.78 & 74.61 & 67.51 & 65.52 & 64.06\\ 
+      MKT\_{a} & 62.94 & 63.04 & 63.03 & 62.91 & 62.93 & 62.98 & 62.89\\ 
+      MKTL & 70.06 & 55.63* & 60.42* & 41.57* & 40.44* & 42.22* & 31.44*\\ 
+      PMT & 63.54 & 63.54 & 63.54 & 63.54 & 63.54 & 63.54 & 63.54\\ 
+      Feature+ & 66.99 & 61.72* & 59.13* & 54.27* & 46.46* & 44.44* & 42.67*\\ 
+      NT & 62.87 & 62.87 & 62.87 & 62.87 & 62.87 & 62.87 & 62.87\\ 
+      Batch & 87.39 & 84.42 & 82.40 & 76.83 & 62.86* & 57.33* & 51.16*\\ 
+\hline\end{tabular}}}%{body}
+\subfloat[Results on USPS]{
+    \resizebox{0.5\textwidth}{!}{
+     \begin{tabular}{|c|c|c|c|c|c|c|c|}
+          \hline 
+          & \multicolumn{7}{c|}{Noise Level} \\ \hline
+          & 0.0 & 0.2 & 0.3 & 0.5 & 0.8 & 0.9 & 1.0\\ \hline
+           SMTLe\_s & \textbf{91.12} & 89.79 & 89.23 & 88.06 & 86.22 & 85.33 & 84.60\\ 
+           SMTLe\_m & 90.78 & \textbf{89.85} & \textbf{89.42} & \textbf{88.55} & \textbf{86.80} & \textbf{85.96} & \textbf{84.91}\\ 
+           MKT\_{m} & 86.80 & 84.80 & 83.57 & 81.02 & 75.96 & 74.53* & 72.73*\\ 
+           MKT\_{s} & 64.18* & 61.39* & 61.80* & 62.93* & 64.85* & 65.29* & 65.55*\\ 
+           MKT\_{a} & 75.76 & 75.76 & 75.75 & 75.79 & 75.75 & 75.78 & 75.84\\ 
+           MKTL & 90.24 & 88.13 & 86.20 & 86.07 & 81.82 & 80.18 & 80.14\\ 
+           PMT & 75.89 & 75.89 & 75.9 & 75.88 & 75.88 & 75.88 & 75.87\\ 
+           Feature+ & 88.42 & 86.56 & 85.28 & 83.23 & 79.79 & 78.68 & 77.17\\ 
+           NT & 75.75 & 75.75 & 75.75 & 75.75 & 75.75 & 75.75 & 75.75\\ 
+           Batch & 91.65 & 90.38 & 89.58 & 87.36 & 82.55 & 80.52 & 77.84\\ 
+     \hline\end{tabular}}}%
+     \caption{Experiment results on 5 examples per class in target training set. We show the percentage of accuracy across the 10 classes on different noise level. We use "*" to denote the results suffer from negative transfer}\label{tab:rs}
+  \end{table*}%
+  
+We perform the algorithms on different scenarios where the different level of noise is added to the source data to train the source models. Still we use LS-SVM to train the source models. For each dataset, we use the accuracy across the 10 classes as the criterion to evaluate the performance of the algorithms. We randomly split the original datasets into 3 sets and run 10 times to report the average performance. 
 
-\begin{table}[h]
-  \centering
-  \caption{Average accuracy in percentage across all categories from Caltech to Caltech with different size of the training set in target problem. 30 examples are randomly chosen from each class to train the source classifier and 30 examples from each class are chosen for the test. }
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-      \# per category    & 5     & 10    & 15    & 20 \\
-    \hline
-    No transfer &         27.33  &         31.53  &         35.73  &         38.47  \\
-    Source+1    &         43.33  &         43.87   &         44.33  &         44.57   \\
-    MKTL        &         38.89  &         43.27   &         45.72  &         47.44   \\
-    MULTIKT     &         37.96  &         42.89   &         45.96  &         47.32  \\
-    MULTIpLE    &         42.63  &         45.63   &         47.81  &         48.73 \\
-    SMITLe        &         \textbf{43.53 }&         \textbf{46.45 } &         \textbf{48.25 } &         \textbf{49.15 } \\
-        \hline
-    Batch       &         43.77  &         44.73   &         46.67  &         48.00 \\
-    \hline
-    \end{tabular}%
-  \label{tab:C2C}%
-\end{table}%
+We show the performance of different algorithms on the two datasets under different noise level in Table \ref{tab:rs}. We show more results with different size of training examples in the target set in Table \ref{tab:mnist} and Table \ref{tab:usps}. From Table \ref{tab:rs} we can see that when there is no noise in the source data, most transfer algorithms can leverage the knowledge of the source model. Our methods $SMTLe_s$ and $SMTLe_m$ achieve the best performance among all transfer methods, but still a slightly underperform the Batch method which can access all the data from both source and target training data. It is worthy to notice that the $MKT_m$ in MNIST and $MKT_s$ in USPS suffer from negative transfer even though there is no noise in the source data. This may cause by their weak regularization term which limits the transfer parameters within the ball with radium 1 (its default setting). The results could be improved if a better regularization can be found. As we add more noise into the source data, some of the transfer algorithms start to suffer from negative transfer. It is not surprising that all the methods (except for NT as no source knowledge is used) get a decreased performance. However, our methods can still outperform the other methods. In our method, the optimal transfer parameters can both limit the VC dimension and reduce empirical risk at the same time. This promise that the target model can still perform well on the unseen data even though the source models become less related to the target domain. We can also see that there are just 3 methods that don't suffer from negative transfer in both datasets, i.e. $SMTLe_s$,$SMTLe_m$ and $MKT_a$. However, we can see that $MKT_a$ is a more conservative method which is reluctant to leveraging the knowledge from the source model and as a result, it can successfully alleviate negative transfer and unable to fully exploit the knowledge from the source as well.
 
-% Table generated by Excel2LaTeX from sheet 'Sheet1'
-\begin{table}[h]
-  \centering
-  \caption{Average accuracy in percentage across all categories from AwA to AwA with different size of the training set in target problem. 50 examples are randomly chosen from each class to train the source classifier and 200 examples from each class are chosen for test.}
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-     \# per category    & 5     & 10    & 15    & 20 \\
-    \hline
-    No transfer &         23.52  &         26.79  &         29.60  &         31.50  \\
-    Source+1    &         \textbf{ 39.00 } &         \textbf{ 39.34 } &         39.62 &         39.74  \\
-    MKTL        &         31.46  &         34.76  &         37.41  &         38.81  \\
-    MULTIKT     &         29.86  &         32.86  &         35.22  &         36.33  \\
-    MULTIpLE    &         37.80  &         38.81  &         39.80  &         40.47  \\
-    SMITLe        &        37.83  &         { 39.31 } &         \textbf{ 40.37 } &         \textbf{41.09} \\
-        \hline
-    Batch       &         39.62  &         40.18  &         40.67  &         41.44  \\
-    \hline
-    \end{tabular}%
-  \label{tab:A2A}%
-\end{table}%
+In summary, in this section, we empirically evaluate the performance of our method in different scenarios where there is different relatedness between the source and target domains. Comparing with some baseline methods we can see that our method can effectively leverage the knowledge from the source models and alleviate negative transfer when other baseline methods suffer.
 
-\subsection{Negative transfer: transferring from incorrect hypotheses}
-In this section, we show how our method performs in transferring knowledge between two different datasets, from AwA dataset to Caltech dataset. Following the settings in the previous experiment, the source models are trained from AwA dataset and transferred to Caltech dataset. %We iteratively select one category as the new one, running multiple times to get the average results for all the algorithms. 
-We show the average performance of each algorithm in Table \ref{tab:A2C}. We can see that negative transfer does happen when transferring the knowledge from AwA to Caltech for all the algorithms except for ours. From the performance of Source+1, we can see that applying the source hypotheses directly leads to poor performance. We can conclude that even though these two datasets share some categories, the data distribution of the feature representation for the same category is not consistent. 
+\input{rs.tex}
 
-Still we take the experiment where the horse is considered as the new category to see the detail performance of each algorithm. % and show it in Figure \ref{fig:awa} . 
-From here we can see that, not surprisingly, the accuracy of SMITLe shows similar accuracy to the no transfer baseline, while other methods suffer from negative transfer and perform even worse than no transfer baseline. In Figure \ref{fig:a2c} we show the parameters learned for each classes in SMITLe in comparison with MULTIpLE. We can see that when the prior knowledge is unrelated, SMITLe resists utilizing the prior knowledge and, therefore, shows almost identical accuracy to the no transfer baseline.
-%\begin{figure*}
-%\includegraphics[width=\textwidth,height=5cm]{fig/A2C_RBF_PHOG.eps}
-%\caption{Transferring from AwA to Caltech-256.}
-%\end{figure*}
-% Table generated by Excel2LaTeX from sheet 'Sheet1'
-
-\begin{figure}
-    \centering
-     \includegraphics[scale=0.25]{fig/A2C_gama.eps} %\label{fig:a2c-b}
-    \caption{Experiment results for 10 classes, AwA. Horse is used as the new category. SMITLe can ignore unrelated prior knowledge.}
-    \label{fig:a2c}
-\end{figure}
-
-
-\begin{table}[htbp]
-  \centering
-  \caption{Average accuracy in percentage across all categories from AwA to Caltech. Examples in AwA are used to train prior models. Different number of training size is randomly selected from Caltech dataset.}
-    \begin{tabular}{|c|c|c|c|c|c|}
-    \hline
-      \# per category           & 5              & 10             & 15             & 20             & 25             \\
-    \hline
-    No transfer &         \textbf{ 30.99 } &         33.97  &         35.95 &         37.78  &         38.27   \\
-    Source+1    &         17.89  &         18.69  &         18.79  &         19.69  &         19.39          \\
-    MKTL        &         25.19  &         30.14  &         32.53  &         34.30  &         35.83  \\
-    MULTIKT     &         27.60  &         32.19  &         34.51  &         36.78  &         37.79  \\
-    MULTIpLE    &         29.79  &         33.45  &         35.49  &         36.77  &         37.43  \\
-    SMITLe        &       30.93  &         \textbf{ 34.13 } &         \textbf{  36.09 } &         \textbf{38.01} &         \textbf{38.46} \\
-    \hline
-    \end{tabular}%
-  \label{tab:A2C}%
-\end{table}%
-
-\subsection{Transferring from mixed hypotheses}
-In real applications, the extreme situation is rare. For most multi-source transfer learning tasks, there should always be some related and useful sources as well as some unrelated ones. In this part, we show how SMITLe performs in the mixed sources.
-
-From negative transfer experiments we see that the knowledge from AwA is unrelated to Caltech and vice versa. To generate mixed sources, we follow the settings in our positive transfer experiment, splitting the AwA dataset into two datasets, and replace the data in some categories in the source dataset with the data of Caltech. 
-For example, if the bat is considered as the new category and we have to replace 3 categories, we choose the data from 3 out of 9 categories (10 categories except for bat) in Caltech to replace the source data accordingly. 
-
-We show the performances across all categories of different algorithms in Table \ref{tab:3c} and Table \ref{tab:4c} where 3 and 4 categories in the source data are replaced by the data from Caltech respectively. From the tables, we can see that in almost every case, SMITLe shows improved or equivalent performance than other baselines. %The improved performance of SMITLe is due to the loss function we designed. Compared to other transfer baselines, the loss function Eq. \eqref{eq:loss} is able to control the transfer parameters $\gamma$ and $\beta$ to prevent negative transfer. For other transfer baselines, such as Multi-KT and MULTIpLE, they try to optimize a convex function directly with non-negative L2 ball constraint, which could not be able to handle the negative transfer effectively.
-
-% Table generated by Excel2LaTeX from sheet 'Sheet1'
-\begin{table}[htbp]
-  \centering
-  \caption{Average accuracy in percentage across all categories from AwA to AwA\&Caltech with different size of the training set in target problem. Data of 3 classes in AwA is replaced by the data from Caltech in target problem.}
-    \begin{tabular}{|c|c|c|c|c|c|}
-    \hline
-      \# per category    & 5     & 10    & 15    & 20    & 25 \\
-    \hline
-    no transfer &         23.99  &         26.24  &         29.02  &         30.05  &         31.18  \\
-    source+1 &         25.70  &         26.30  &         26.57  &         26.69  &         26.97  \\
-    MKTL  &         25.30  &         27.59  &         30.42  &         31.01  &         31.97  \\
-    MultiKT &         25.53  &         27.94  &         30.48  &         31.36  &         32.31  \\
-    MULTIpLE &         28.11  &         29.61  &         31.34  &         32.18  &         32.89  \\
-    SMITLe &         \textbf{28.75}  &         \textbf{30.48}  &         \textbf{32.30}  &         \textbf{33.06}  &         \textbf{33.71}  \\
-    \hline
-    \end{tabular}%
-  \label{tab:3c}%
-\end{table}%
-
-
-
-% Table generated by Excel2LaTeX from sheet 'Sheet1'
-\begin{table}[htbp]
-  \centering
-  \caption{Average accuracy in percentage across all categories from AwA to AwA\&Caltech with different size of the training set in target problem. Data of 4 classes in AwA is replaced by the data from Caltech in target problem.}
-    \begin{tabular}{|c|c|c|c|c|c|}
-    \hline
-       \# per category    & 5     & 10    & 15    & 20    & 25 \\
-    \hline
-    no transfer &         24.02  &         26.25  &         29.06  &         30.07  &         31.20  \\
-    source+1 &         23.23  &         23.80  &         24.03  &         24.21  &         24.47  \\
-    MKTL  &         24.44  &         26.78  &         29.64  &         30.40  &         31.50  \\
-    MultiKT &         24.73  &         27.40  &         29.93  &         30.91  &         31.91  \\
-    MULTIpLE &         26.50  &         28.33  &         30.27  &         31.29  &         32.12  \\
-    SMITLe &         \textbf{27.20}  &         \textbf{29.33}  &         \textbf{31.40}  &         \textbf{32.31}  &         \textbf{33.11}  \\
-    \hline
-    \end{tabular}%
-  \label{tab:4c}%
-\end{table}%
