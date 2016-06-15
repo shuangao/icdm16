@@ -3,14 +3,14 @@ In this section, we focus on the Phrase I of HTL and introduce our biased regula
 We define our transfer task in the following way: Suppose we have $N$ visual categories. 
 In our source task, $N$ source binary classifiers $f'_n(x)$ for $n=1,...,N$, are trained from a distribution $\mathcal{D}_s$ to distinguish whether an object belongs to each of the $N$ categories. In our target task, we have another small set of data $(x,y)$ drawn from another distribution $\mathcal{D}_t$ with the same $N$ categories as those in source task. We want to train $N$ target binary classifiers $f_n(x)$ for $n=1,...,N$ on the data of the target domain so that they can perform well on the target domain.
 
-\subsection{Biased regularization in HTL}
+\subsection{Biased Regularization in HTL}
 From previous works of HTL, the source and target classifiers $f$ follow the hypothesis space of all linear model, i.e. $f_n = w\phi(x)+b$, where $\phi(x)$ can be any feature mapping that maps the example into another space. The transfer learning process of each target binary classifier $f_n$ can be formalized as the following optimization problem:
 \begin{equation}\label{eq:svm_obj}
 \begin{aligned}
-\textbf{min} && R({w_n}) + \frac{C}{2}\sum\limits_i^l {\mathcal{L}(f_n(x_i),Y_{in})} \\
+\textbf{min} && \Omega({w_n}) + \frac{C}{2}\sum\limits_i^l {\mathcal{L}(f_n(x_i),Y_{in})} \\
 \end{aligned}
 \end{equation}
-Here $R({w})$ is the regularization term to guarantee good generalization performance and avoid overfitting. $Y_{in}$ is the encoded label for binary classifier following $Y_{in}=1$ if $y_i=n$ and $-1$ otherwise. $\mathcal{L}(\cdot)$ is the loss function. When we consider to use Lease Square SVM as the classifier, $\mathcal{L}(f,y) = (f-y)^2$. 
+Here $\Omega({w})$ is the regularization term to guarantee good generalization performance and avoid overfitting. $Y_{in}$ is the encoded label for binary classifier following $Y_{in}=1$ if $y_i=n$ and $-1$ otherwise. $\mathcal{L}(\cdot)$ is the loss function. When we consider to use Lease Square SVM as the classifier, $\mathcal{L}(f,y) = (f-y)^2$. 
 
 In previous works, such as Multi-KT \cite{tommasi2014learning} , assume that the hyperplane $w_n$ of the target classifier should be closed to the weighted combination of the hyperplane of the source models. The optimization problem \eqref{eq:svm_obj} can be written as:
 \begin{equation}\label{eq:opt}
@@ -49,8 +49,8 @@ We can rewrite Eq. \eqref{eq:aug_pre} as:
 f_n(x)&= [w_{n}'',\beta_1,...,\beta_N][\phi(x),f'_1(x),...,f'_N(x)]^T\\&+(b_n-\sum\limits_k^N{\beta _kb_k})
 \end{aligned}
 \end{equation}
-Here, we propose a novel insight to the transfer problem. From Eq. \eqref{eq:aug}, we can see that solving the optimization problem \eqref{eq:opt} is equivalent to find the optimal hyperplane $\hat{w}=[w_{n}'',\beta_1,...,\beta_N]$ for the augmented data $\hat{x}=[\phi(x),f'_1(x),...,f'_N(x)]$. An intuitive interpretation of the auxiliary feature is that it can be considered as a similarity score from the source model. When the target model decides whether an object belongs to certain category, it also weight the decisions of the source model as the reference.
-Moreover, we can see that because the auxiliary features come from the decision scores of the source models, we can greatly extend the choice of the types of the source classifier. We can exploit the knowledge of any source model that can output the decision score of an example while previous methods are limited to SVMs \cite{tommasi2014learning} \cite{kuzborskij2013n}. When there are multiple source models, we can choose multiple sources (multi-source adaptation) or the best source (single-source) to augment the original data (see Figure \ref{fig:aug}).
+Here, we propose a novel insight to the transfer problem. From Eq. \eqref{eq:aug}, we can see that solving the optimization problem \eqref{eq:opt} is equivalent to find the optimal hyperplane $\hat{w}=[w_{n}'',\beta_1,...,\beta_N]$ for the augmented data $\hat{x}=[\phi(x),f'_1(x),...,f'_N(x)]$. An intuitive interpretation of the auxiliary feature is that it can be considered as a similarity score from the source model. When the target model decides whether an object belongs to certain category, it also considers the decisions of the source model as the reference. \hl{For example, when we decide whether an objective is a motorbike, we can also refer to the model of a bicycle to see if this objective is similar to a bicycle.}
+Moreover, we can see that because the auxiliary features come from the decision scores of the source models, we can greatly extend the choice of the type of the source classifier. We can exploit the knowledge of any source model that can output the decision score of an example while previous methods are limited to SVMs \cite{tommasi2014learning} \cite{kuzborskij2013n}. When there are multiple source models, we can choose multiple sources (multi-source adaptation) or the best source (single-source) to augment the original data (see Figure \ref{fig:aug}).
 
 
 

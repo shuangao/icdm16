@@ -12,10 +12,8 @@ In this paper, we choose the Leave-One-Out (LOO) cross-validation error to estim
 
 Let $K(X,X)$ be the kernel matrix and
 \begin{equation}\label{eq:linear}
-\psi=\left[ {\begin{array}{*{20}{c}}
-{K(X,X) + \frac{1}{C}{\rm{I}}}&\mathbf{1}\\
-\mathbf{1^T}&0
-\end{array}} \right]
+\psi=\left[ 
+{K(X,X) + \frac{1}{C}{\rm{I}}} \right]
 \end{equation}
 The unbiased LOO estimation for sample $x_i$ can be written as \cite{cawley2006leave}:
 \begin{equation} \label{eq:loo}
@@ -23,23 +21,10 @@ The unbiased LOO estimation for sample $x_i$ can be written as \cite{cawley2006l
 \end{equation}
 Here $\psi^{-1}$ is the inverse of matrix $\psi$ and  $\psi_{ii}^{-1}$ is the $ith$ diagonal element of $\psi^{-1}$. 
 
-Let $F'(X)=\left[f'_1(X),...,f'_N(X)\right]$ be the output matrix of the source models and define $\left[\begin{array}{cc}\boldsymbol{\alpha'} & b'\end{array}\right]^T$ and $\left[\begin{array}{cc}\boldsymbol{\alpha}''& b''\end{array}\right]^T$ as follow:
+Let $F'(X)=\left[f'_1(X),...,f'_N(X)\right]$ be the output matrix of the source models and define $\begin{array}{c}\boldsymbol{\alpha'} \end{array}$ and $\begin{array}{c}\boldsymbol{\alpha}''\end{array}$ as follow:
 \begin{equation}
-\begin{array}{c}
- {\psi}\left[ {\begin{array}{*{20}{c}}
-{\boldsymbol{\alpha} '}\\
-{b'}
-\end{array}} \right] = \left[ {\begin{array}{*{20}{c}}
-Y\\
-0
-\end{array}} \right], \quad
-{\psi}\left[ {\begin{array}{*{20}{c}}
-{\boldsymbol{\alpha} ''}\\
-{b''}
-\end{array}} \right] = \left[ {\begin{array}{*{20}{c}}
-{F'(X)}\\
-0
-\end{array}} \right]
+\begin{array}{cc}
+\boldsymbol{\alpha'} =\psi^{-1} \times Y & \boldsymbol{\alpha''} =\psi^{-1} \times F'(X)
 \end{array}
 \end{equation}
 
@@ -78,7 +63,7 @@ Instead of optimize $\xi_i$ directly, we add the extra regularization terms for 
 
 Here $\lambda$ is the regularization parameter. This objective function can improve the performance of the target model on the unseen test data from two aspects: improve the generalization ability by limiting the VC dimension and reduce the empirical risk compared to no transfer model.
 
-As we discussed in Section \ref{sec:prob}, regularizing the transfer parameters could improve the performance of the target model. Moreover, by adding the regularization term, the objective function \eqref{eq:loss} turns to be strongly convex. Therefore, the strongly convex property guarantees that SMTLe can converge at the rate of $O(\frac{\log(t)}{t})$ which promises we can find the optimal transfer parameters effectively (see proof in Appendix \ref{appd:convg}).
+As we discussed in Section \ref{sec:prob}, regularizing the transfer parameters could improve the performance of the target model. Moreover, by adding the regularization term, the objective function \eqref{eq:loss} turns to be strongly convex. Therefore, the strongly convex property guarantees that SMTLe can converge at the rate of $O(\frac{\log(t)}{t})$ by Sub-Gradient Descent. This promises we can find the optimal transfer parameters effectively (see proof in Appendix \ref{appd:convg}).
 We can also show that this objective function can achieve lower empirical risk compared to no transfer model (see Appendix \ref{appd:proof}). This is very important when the source and target domains are not related.
 
  
@@ -88,7 +73,7 @@ By adding a dual set of variables in objective function \eqref{eq:loss}, one for
 \begin{aligned}
  &L\left( {\beta ,\xi ,\eta } \right) =
  \frac{{{\lambda}}}{2}\sum\limits_{n = 1}^N {{{\left\| {{\beta _n}} \right\|}^2}}  + \sum\limits_{i = 1}^l {{\xi _i}} \\
-   &+ \sum\limits_{i,n} {{\eta _{i,n}}\left[ {1 - {\varepsilon _{n{y_i}}} + {{\hat Y}_{in}}\left( {\beta } \right) - {{\hat Y}_{i{y_i}}}\left( {\beta } \right) - {\xi _i}} \right]}  \\
+   &+ \sum\limits_{i,n} {{\eta _{i,n}}\left[ {1 - {\varepsilon _{n{y_i}}} + {{\hat Y}_{in}}\left( {\beta_n } \right) - {{\hat Y}_{i{y_i}}}\left( {\beta_{y_i} } \right) - {\xi _i}} \right]}  \\
  &\textbf{s.t.} \quad  \forall i,n \quad {} {\eta _{i,n}} \ge 0
 \end{aligned}
 \end{equation}
