@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.20)  15 JUN 2016 10:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.20)  17 JUN 2016 22:48
 entering extended mode
 **total.tex
 (total.tex
@@ -457,17 +457,14 @@ Package pdftex.def Info: fig/domain2.jpg used on input line 24.
 
 
  <./fig/negative.png>]) (gama_works.tex [2 <./fig/domain2.jpg>])
-(statement2.tex <fig/aug2.png, id=19, 837.3684pt x 303.0522pt>
+(statement2.tex <fig/aug2.png, id=18, 837.3684pt x 303.0522pt>
 File: fig/aug2.png Graphic file (type png)
 
 <use fig/aug2.png>
 Package pdftex.def Info: fig/aug2.png used on input line 11.
 (pdftex.def)             Requested size: 418.68317pt x 151.52573pt.
-
-Underfull \vbox (badness 1460) has occurred while \output is active []
-
- [3])
-(smitle.tex [4 <./fig/aug2.png>] (agl1.tex)) (gama_exp.tex [5]
+ [3]) (smitle.tex [4 <./fig/aug2.png>] (agl1.tex))
+(gama_exp.tex [5]
 Underfull \hbox (badness 10000) in paragraph at lines 14--14
 [][][]\OT1/ptm/m/n/8 Algorithms are im-ple-mented by the orig-i-nal au-
  []
@@ -486,18 +483,14 @@ n
 <fig/noise.png, id=37, 543.9522pt x 198.0198pt>
 File: fig/noise.png Graphic file (type png)
  <use fig/noise.png>
-Package pdftex.def Info: fig/noise.png used on input line 32.
+Package pdftex.def Info: fig/noise.png used on input line 33.
 (pdftex.def)             Requested size: 244.77621pt x 89.10808pt.
 
-Overfull \hbox (2.81705pt too wide) in paragraph at lines 53--71
+Overfull \hbox (2.81705pt too wide) in paragraph at lines 54--72
 [][][] 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
-(rs.tex
+[6 <./fig/noise.png>] (rs.tex
 Overfull \hbox (16.0386pt too wide) in paragraph at lines 17--62
 [][] [] 
  []
@@ -511,7 +504,7 @@ Overfull \hbox (16.0386pt too wide) in paragraph at lines 17--62
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Overfull \hbox (16.03925pt too wide) in paragraph at lines 82--127
+Overfull \hbox (16.0386pt too wide) in paragraph at lines 82--127
 [][] [] 
  []
 
@@ -520,18 +513,18 @@ Overfull \hbox (16.0386pt too wide) in paragraph at lines 82--127
 [] [] 
  []
 
-)) (gama_con.tex [7 <./fig/noise.png>]) (appd.tex (converge.tex
+)) (gama_con.tex) (appd.tex (converge.tex
 Overfull \hbox (15.21904pt too wide) detected at line 24
 [] []
  []
 
-
+[7]
 Overfull \hbox (5.86429pt too wide) detected at line 32
 [] []
  []
 
 
-Underfull \vbox (badness 6348) has occurred while \output is active []
+Underfull \vbox (badness 1769) has occurred while \output is active []
 
  [8])
 (theorem.tex
@@ -563,12 +556,12 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  5129 strings out of 493673
- 79172 string characters out of 3141520
- 303148 words of memory out of 3000000
+ 79169 string characters out of 3141520
+ 307147 words of memory out of 3000000
  8357 multiletter control sequences out of 15000+200000
  43739 words of font info for 87 fonts, out of 3000000 for 9000
  1028 hyphenation exceptions out of 8191
- 44i,18n,47p,2383b,695s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,18n,47p,1112b,627s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Progr
@@ -588,7 +581,7 @@ onts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
 urw/times/utmbi8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/
 utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb
 >
-Output written on total.pdf (10 pages, 511922 bytes).
+Output written on total.pdf (10 pages, 512102 bytes).
 PDF statistics:
  115 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

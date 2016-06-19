@@ -4,6 +4,9 @@
 \citation{tommasi2014learning}
 \citation{kuzborskij2013n}
 \citation{kuzborskij2013stability}
+\citation{kuzborskij2013n}
+\citation{jie2011multiclass}
+\citation{suykens1999least}
 \citation{bishop2006pattern}
 \citation{tommasi2014learning}
 \citation{ben2010theory}
@@ -17,6 +20,7 @@
 \citation{kuzborskij2013n}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Relying on the related source knowledge can improve the performance of the target model while forcing the target model to rely on the unrelated source could suffer from negative transfer.\relax }}{1}}
+\citation{vapnik2015learning}
 \citation{pan2010survey}
 \citation{tommasi2014learning}
 \citation{lim2012transfer}
@@ -37,6 +41,9 @@
 \citation{tommasi2010safety}
 \citation{cawley2006leave}
 \citation{vapnik2015learning}
+\citation{vapnik2015learning}
+\citation{tommasi2014learning}
+\citation{aytar2011tabula}
 \citation{tommasi2014learning}
 \citation{aytar2011tabula}
 \citation{tommasi2014learning}
@@ -48,59 +55,59 @@
 \newlabel{eq:svm_obj}{{2}{3}}
 \citation{vapnik1999overview}
 \citation{suykens1999least}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The transfer learning process can be considered as the augmentation of the target data where the decision scores of the source models are appended as the auxiliary features. The transfer parameters can be considered as the a part of the corresponding hyperplane. We can consider 2 augmentation strategies: multi-adaptation and single-adaptation.\relax }}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The transfer learning process can be considered as the augmentation of the target data where the decision scores of the source models are appended as the auxiliary features. The transfer parameters can be considered as a part of the corresponding hyperplane. We can consider 2 augmentation strategies: multi-adaptation and single-adaptation.\relax }}{4}}
 \newlabel{fig:aug}{{3}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Reasons for negative transfer}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Statistical analysis of the feature augmentation}{4}}
 \newlabel{eq:srm}{{3}{4}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}SMTLe}{4}}
 \newlabel{sec:smitle}{{IV}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Leave-One-Out estimation of LS-SVM }{4}}
 \citation{kuzborskij2013stability}
 \citation{elisseeff2003leave}
 \citation{cawley2006leave}
 \citation{crammer2002algorithmic}
+\citation{boyd2004convex}
 \citation{BoydCO}
 \citation{lampert2009learning}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Multiclass Prediction Loss with Leave-One-Out}{5}}
+\citation{lecun1998gradient}
+\citation{hull1994database}
 \newlabel{eq:linear}{{4}{5}}
 \newlabel{eq:loo}{{5}{5}}
 \newlabel{eq:solution}{{7}{5}}
-\newlabel{eq:train_loss}{{8}{5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Loss Function of SMTLe}{5}}
+\newlabel{eq:train_loss}{{8}{5}}
 \newlabel{eq:loss}{{9}{5}}
 \newlabel{eq:dual}{{10}{5}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Experiment}{5}}
 \newlabel{sec:exp}{{V}{5}}
-\citation{lecun1998gradient}
-\citation{hull1994database}
 \citation{jie2011multiclass}
 \citation{tommasi2014learning}
 \citation{aytar2011tabula}
 \citation{kuzborskij2013n}
 \citation{tommasi2014learning}
-\citation{gehler2009feature}
 \newlabel{alg:1}{{\caption@xref {alg:1}{ on input line 1}}{6}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces SMTLe\relax }}{6}}
 \newlabel{alg:1}{{1}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Dataset}{6}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Baseline methods and experiment setup}{6}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Experiment results on 5 examples per class in target training set. We show the percentage of accuracy across the 10 classes on different noise level. We use "*" to denote the results suffer from negative transfer\relax }}{7}}
-\newlabel{tab:rs}{{I}{7}}
-\@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {Results on MNIST}}}{7}}
-\@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {Results on USPS}}}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces We add the noise (Salt \& Pepper niose) to the source data to generate the source domain with different relatedness to the target domain. From the images we can see that the source domain is still related to the target domain in different level of the noise rate\relax }}{7}}
-\newlabel{fig:noise}{{4}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces We add the noise (Salt \& Pepper noise) to the source data to generate the source domain with different relatedness to the target domain. From the images we can see that the source domain is still related to the target domain in different level of the noise rate\relax }}{6}}
+\newlabel{fig:noise}{{4}{6}}
+\citation{rockafellar2015convex}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-C}}Experiment result \& analysis}{7}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{7}}
-\citation{rockafellar2015convex}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  A: Convergence Analysis}{7}}
+\newlabel{appd:convg}{{A}{7}}
+\newlabel{eq:app:strong}{{12}{7}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Experiment results on 5 examples per class in target training set. We show the percentage of accuracy across the 10 classes on different noise level. We use "*" to denote the results suffer from negative transfer\relax }}{8}}
+\newlabel{tab:rs}{{I}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {Results on MNIST}}}{8}}
+\@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {Results on USPS}}}{8}}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Results on MNIST with 10/15/20/25 positive examples for each class\relax }}{8}}
 \newlabel{tab:mnist}{{II}{8}}
 \@writefile{lot}{\contentsline {subtable}{\numberline{(a)}{\ignorespaces {10 examples per class}}}{8}}
 \@writefile{lot}{\contentsline {subtable}{\numberline{(b)}{\ignorespaces {15 examples per class}}}{8}}
 \@writefile{lot}{\contentsline {subtable}{\numberline{(c)}{\ignorespaces {20 examples per class}}}{8}}
 \@writefile{lot}{\contentsline {subtable}{\numberline{(d)}{\ignorespaces {25 examples per class}}}{8}}
-\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  A: Convergence Analysis}{8}}
-\newlabel{appd:convg}{{A}{8}}
-\newlabel{eq:app:strong}{{12}{8}}
 \newlabel{eq:app:inner}{{13}{8}}
 \newlabel{eq:app:squrediff}{{14}{8}}
 \newlabel{eq:app:it_diff}{{15}{8}}
@@ -111,9 +118,10 @@
 \@writefile{lot}{\contentsline {subtable}{\numberline{(c)}{\ignorespaces {20 examples per class}}}{9}}
 \@writefile{lot}{\contentsline {subtable}{\numberline{(d)}{\ignorespaces {25 examples per class}}}{9}}
 \newlabel{eq:app:difsum}{{17}{9}}
-\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  B: Proof of avoiding negative transfer}{9}}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  B: Reduced training error}{9}}
 \newlabel{appd:proof}{{B}{9}}
 \newlabel{eq:opt_beta}{{20}{9}}
+\newlabel{eq:link1}{{21}{9}}
 \bibstyle{IEEEtran}
 \bibdata{research}
 \bibcite{ben2010theory}{1}
@@ -121,29 +129,28 @@
 \bibcite{tommasi2014learning}{3}
 \bibcite{kuzborskij2013n}{4}
 \bibcite{kuzborskij2013stability}{5}
-\bibcite{bishop2006pattern}{6}
-\bibcite{ben2007analysis}{7}
-\bibcite{jie2011multiclass}{8}
-\bibcite{Lu201514}{9}
-\bibcite{lim2012transfer}{10}
-\bibcite{LongICML15}{11}
-\bibcite{yang2007cross}{12}
-\bibcite{aytar2011tabula}{13}
-\bibcite{davis2009deep}{14}
-\bibcite{wang2014active}{15}
-\bibcite{zhou2014multi}{16}
-\bibcite{tommasi2010safety}{17}
-\bibcite{cawley2006leave}{18}
-\bibcite{vapnik2015learning}{19}
-\bibcite{vapnik1999overview}{20}
-\bibcite{suykens1999least}{21}
+\bibcite{jie2011multiclass}{6}
+\bibcite{suykens1999least}{7}
+\bibcite{bishop2006pattern}{8}
+\bibcite{ben2007analysis}{9}
+\bibcite{Lu201514}{10}
+\bibcite{vapnik2015learning}{11}
+\bibcite{lim2012transfer}{12}
+\bibcite{LongICML15}{13}
+\bibcite{yang2007cross}{14}
+\bibcite{aytar2011tabula}{15}
+\bibcite{davis2009deep}{16}
+\bibcite{wang2014active}{17}
+\bibcite{zhou2014multi}{18}
+\bibcite{tommasi2010safety}{19}
+\bibcite{cawley2006leave}{20}
+\bibcite{vapnik1999overview}{21}
 \bibcite{elisseeff2003leave}{22}
 \bibcite{crammer2002algorithmic}{23}
-\bibcite{BoydCO}{24}
-\bibcite{lampert2009learning}{25}
-\bibcite{lecun1998gradient}{26}
-\bibcite{hull1994database}{27}
-\bibcite{gehler2009feature}{28}
+\bibcite{boyd2004convex}{24}
+\bibcite{BoydCO}{25}
+\bibcite{lampert2009learning}{26}
+\bibcite{lecun1998gradient}{27}
+\bibcite{hull1994database}{28}
 \bibcite{rockafellar2015convex}{29}
-\newlabel{eq:link1}{{21}{10}}
 \@writefile{toc}{\contentsline {section}{References}{10}}

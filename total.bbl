@@ -47,6 +47,17 @@ I.~Kuzborskij and F.~Orabona, ``Stability and hypothesis transfer learning,''
   in \emph{Proceedings of the 30th International Conference on Machine
   Learning}, 2013, pp. 942--950.
 
+\bibitem{jie2011multiclass}
+L.~Jie, T.~Tommasi, and B.~Caputo, ``Multiclass transfer learning from
+  unconstrained priors,'' in \emph{Computer Vision (ICCV), 2011 IEEE
+  International Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2011, pp. 1863--1870.
+
+\bibitem{suykens1999least}
+J.~A. Suykens and J.~Vandewalle, ``Least squares support vector machine
+  classifiers,'' \emph{Neural processing letters}, vol.~9, no.~3, pp. 293--300,
+  1999.
+
 \bibitem{bishop2006pattern}
 C.~M. Bishop, ``Pattern recognition,'' \emph{Machine Learning}, 2006.
 
@@ -55,16 +66,15 @@ S.~Ben-David, J.~Blitzer, K.~Crammer, F.~Pereira \emph{et~al.}, ``Analysis of
   representations for domain adaptation,'' \emph{Advances in neural information
   processing systems}, vol.~19, p. 137, 2007.
 
-\bibitem{jie2011multiclass}
-L.~Jie, T.~Tommasi, and B.~Caputo, ``Multiclass transfer learning from
-  unconstrained priors,'' in \emph{Computer Vision (ICCV), 2011 IEEE
-  International Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
-  2011, pp. 1863--1870.
-
 \bibitem{Lu201514}
 J.~Lu, V.~Behbood, P.~Hao, H.~Zuo, S.~Xue, and G.~Zhang, ``Transfer learning
   using computational intelligence: A survey,'' \emph{Knowledge-Based Systems},
   vol.~80, pp. 14 -- 23, 2015, 25th anniversary of Knowledge-Based Systems.
+
+\bibitem{vapnik2015learning}
+V.~Vapnik and R.~Izmailov, ``Learning using privileged information: Similarity
+  control and knowledge transfer,'' \emph{Journal of Machine Learning
+  Research}, vol.~16, pp. 2023--2049, 2015.
 
 \bibitem{lim2012transfer}
 J.~J. Lim, ``Transfer learning by borrowing examples for multiclass object
@@ -116,19 +126,9 @@ G.~C. Cawley, ``Leave-one-out cross-validation based model selection criteria
   International Joint Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax
   IEEE, 2006, pp. 1661--1668.
 
-\bibitem{vapnik2015learning}
-V.~Vapnik and R.~Izmailov, ``Learning using privileged information: Similarity
-  control and knowledge transfer,'' \emph{Journal of Machine Learning
-  Research}, vol.~16, pp. 2023--2049, 2015.
-
 \bibitem{vapnik1999overview}
 V.~N. Vapnik, ``An overview of statistical learning theory,'' \emph{Neural
   Networks, IEEE Transactions on}, vol.~10, no.~5, pp. 988--999, 1999.
-
-\bibitem{suykens1999least}
-J.~A. Suykens and J.~Vandewalle, ``Least squares support vector machine
-  classifiers,'' \emph{Neural processing letters}, vol.~9, no.~3, pp. 293--300,
-  1999.
 
 \bibitem{elisseeff2003leave}
 A.~Elisseeff, M.~Pontil \emph{et~al.}, ``Leave-one-out error and stability of
@@ -140,9 +140,13 @@ K.~Crammer and Y.~Singer, ``On the algorithmic implementation of multiclass
   kernel-based vector machines,'' \emph{The Journal of Machine Learning
   Research}, vol.~2, pp. 265--292, 2002.
 
+\bibitem{boyd2004convex}
+S.~Boyd and L.~Vandenberghe, \emph{Convex optimization}.\hskip 1em plus 0.5em
+  minus 0.4em\relax Cambridge university press, 2004.
+
 \bibitem{BoydCO}
-S.~Boyd and L.~Vandenberghe, \emph{Convex Optimization}.\hskip 1em plus 0.5em
-  minus 0.4em\relax New York, NY, USA: Cambridge University Press, 2004.
+------, \emph{Convex Optimization}.\hskip 1em plus 0.5em minus 0.4em\relax New
+  York, NY, USA: Cambridge University Press, 2004.
 
 \bibitem{lampert2009learning}
 C.~H. Lampert, H.~Nickisch, and S.~Harmeling, ``Learning to detect unseen
@@ -159,12 +163,6 @@ Y.~LeCun, L.~Bottou, Y.~Bengio, and P.~Haffner, ``Gradient-based learning
 J.~J. Hull, ``A database for handwritten text recognition research,''
   \emph{Pattern Analysis and Machine Intelligence, IEEE Transactions on},
   vol.~16, no.~5, pp. 550--554, 1994.
-
-\bibitem{gehler2009feature}
-P.~Gehler and S.~Nowozin, ``On feature combination for multiclass object
-  classification,'' in \emph{Computer Vision, 2009 IEEE 12th International
-  Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2009, pp.
-  221--228.
 
 \bibitem{rockafellar2015convex}
 R.~T. Rockafellar, \emph{Convex analysis}.\hskip 1em plus 0.5em minus

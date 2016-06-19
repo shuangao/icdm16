@@ -1,14 +1,11 @@
-In this section, we focus on the Phrase II of HTL, to estimate the transfer parameter in our task. We introduce an algorithm, called SMTLe, that can effectively estimate unbiased transfer parameter from a small training set and alleviate negative transfer. 
+In this section, we focus on Phase II of our framework, estimating the transfer parameter. We introduce an algorithm, called SMTLe, that can effectively estimate unbiased transfer parameter from a small training set and alleviate negative transfer. 
 
-\subsection{Multiclass Prediction Loss with Leave-One-Out}
-%\hl{In this part, we introduce our method to estimate the proper $\boldsymbol{\beta}$ that can prevent negative transfer. We use closed-form LOO error to evaluate the performance of SMTLe for multi-class classification.  and optimize $\boldsymbol{\beta}$ with our novel objective function to prevent negative transfer.}
+\subsection{Leave-One-Out estimation of LS-SVM }
+In the previous section, we introduce a novel perspective for HTL by feature augmentation. We show that how to set the values of the transfer parameters can significantly affect the performance of the target model. To achieve better performance of the target model, we have to reduce the training error and limit the VC dimension of the target model to improve its performance and alleviate negative transfer. In this part, we introduce the Leave-One-Out cross-validation  (LOO-CV) error to estimate the training error of each target binary model.
 
-In the previous section, we introduce a novel perspective for HTL and show that the Phrase I of HTL is equivalent to augmenting the target data with the outputs of the source models. We show that how to set the values of the transfer parameters can significantly affect the performance of the target model. We have to decrease the empirical risk to improve the performance and alleviate negative transfer. In this part, we introduce the multiclass Leave-One-Out cross-validation  (LOO-CV) error to estimate the empirical risk of the target model.
-
-%From Phrase I, we can see that the amount of knowledge transferred is determined by the transfer parameter $\boldsymbol{\beta}$. Generally, we would like to reduce the amount of transfer from the source hypotheses when they are not related. Meanwhile, for those correct ones, aggressively increasing the amount of transfer can boost the performance of the target model. Once we fix the value of $\boldsymbol{\beta}$, our task can be solved directly.
 
 As we discussed above, we have to choose the proper transfer parameters $\boldsymbol{\beta}$ to minimize the empirical risk on the target training set to exploit the source knowledge.
-In this paper, we choose the Leave-One-Out (LOO) cross-validation error to estimate the empirical risk. We choose it for the following reasons: (1) It is proven that LOO error has a low bias on small training data regime \cite{kuzborskij2013stability}. (2) The Leave-One-Out error is an almost unbiased estimator of the generalization error \cite{elisseeff2003leave}. (3) Moreover, for LS-SVM, we can obtain unbiased LOO-CV error in closed form which means we can estimate the values of the transfer parameters in a more efficient way.
+In this paper, we choose the Leave-One-Out (LOO) cross-validation error to estimate the empirical risk for the following reasons: (1) It is proven that LOO error has a low bias on small training data regime \cite{kuzborskij2013stability}. The Leave-One-Out error is an almost unbiased estimator of the generalization error \cite{elisseeff2003leave}. (2) For LS-SVM, we can obtain unbiased LOO-CV error in closed form which means we can estimate the values of the transfer parameters in a more efficient way.
 
 Let $K(X,X)$ be the kernel matrix and
 \begin{equation}\label{eq:linear}
@@ -28,29 +25,25 @@ Let $F'(X)=\left[f'_1(X),...,f'_N(X)\right]$ be the output matrix of the source 
 \end{array}
 \end{equation}
 
-The matrix $\boldsymbol{\alpha}=\{\alpha_{in}\}$ in Eq. \eqref{eq:loo} can be calculated as:
+The matrix $\boldsymbol{\alpha}=\{\alpha_{in}|i=1,...l;n=1,...,N\}$ in Eq. \eqref{eq:loo} can be calculated as:
 \begin{equation}\label{eq:solution}
  \boldsymbol{\alpha}  = \boldsymbol{\alpha} ' - \boldsymbol{\alpha} ''\boldsymbol{\beta ^T}
 \end{equation}
 
-Let us call $\xi_i$ the multi-class prediction error for example $x_i$. $\xi_i$ can be defined as \cite{crammer2002algorithmic}:
+Now, we already have an effective way to measure the performance of each target binary model with different $\boldsymbol{\beta}$ for our task. In the next subsection, we expand it to the multi-class scenario to estimate the optimal transfer parameters.
+
+\subsection{Loss Function of SMTLe}
+In this subsection, we propose a novel objective function according to our multi-class prediction loss function for transfer parameter estimation. We show that we can effectively obtain the optimal  $\boldsymbol{\beta}$ that alleviates negative transfer. 
+
+For the multi-class scenario, we use One-versus-all strategy to assign the label to class $j$ if $j \equiv \arg {\max _{n = 1,...,N}}\left\{{f_n}(x)\right\}$. Let us call $\xi_i$ the multi-class prediction error for example $x_i$. $\xi_i$ can be defined as \cite{crammer2002algorithmic}:
 \begin{equation}\label{eq:train_loss}
 \xi_i(\beta) = \mathop {\max }\limits_{n \in \left\lbrace 1,...,N \right\rbrace } {\left[ {1 - {\varepsilon _{n{y_i}}} + {{\hat Y}_{in}}\left( {\beta_n } \right) - {{\hat Y}_{i{y_i}}}\left( {\beta_{y_i} } \right)} \right]}
 \end{equation}
 Where $\varepsilon _{n{y_i}}=1$ if $n=y_i$ and 0 otherwise. The intuition behind this loss function is to enforce the distance between the true class and other classes to be at least 1. 
-
-
-
-Now, we already have an effective way to measure the performance of the target model with different $\boldsymbol{\beta}$ for our task. In the next part, we introduce how we optimize the parameters.
-\subsection{Loss Function of SMTLe}
-In this part, we propose a novel objective function according to our multi-class prediction loss function for transfer parameter estimation. We show that we can effectively obtain the optimal  $\boldsymbol{\beta}$ that is resistant to negative transfer. 
  
 From Eq. \eqref{eq:train_loss} we can see that, different from the binary scenario where 0 is used as the hard threshold to distinguish the two classes, our multi-class loss only depends on the gap between the decision function value of the correct label ($\hat Y_{y_i}$) and the maximum among the decision function value of the other labels ${{\hat Y}_{in}}(n \ne y_i)$. To reduce $\xi_i$ for a specific example $x_i$, we only have to increase the gap between ${{\hat Y}_{in}(n \ne y_i)}$ and ${{\hat Y}_{i{y_i}}}$. 
 
-%\hl{As we mentioned before, the amount of knowledge transfered is positively correlated to the value of transfer parameter. 
-%When the source hypotheses are related, we have $w'_{y_i}\phi ({x_i})> w'_{n}\phi ({x_i})$. If $\xi_i>0$, increasing the transfer parameters can reduce the gap between ${\hat Y_{y_i}}$ and ${{\hat Y}_{in}(n \ne y_i)}$, leading to smaller $\xi_i$. When the prior hypotheses are incorrect and $\xi_i>0$, there exists a $j(j\ne y_i)$ such that $w'_{y_i}\phi ({x_i})<w'_{j}\phi ({x_i})$. Thus, reducing the transfer parameter can eventually reduce $\xi_i$.}
-
-Instead of optimize $\xi_i$ directly, we add the extra regularization terms for $\boldsymbol{\beta}$. Then we define our objective function as:
+Instead of optimizing $\xi_i$ directly, we add the extra regularization terms for $\boldsymbol{\beta}$. Then we define our objective function as:
 \begin{equation}\label{eq:loss}
 \begin{aligned}
 & \textbf{min}
@@ -63,8 +56,8 @@ Instead of optimize $\xi_i$ directly, we add the extra regularization terms for 
 
 Here $\lambda$ is the regularization parameter. This objective function can improve the performance of the target model on the unseen test data from two aspects: improve the generalization ability by limiting the VC dimension and reduce the empirical risk compared to no transfer model.
 
-As we discussed in Section \ref{sec:prob}, regularizing the transfer parameters could improve the performance of the target model. Moreover, by adding the regularization term, the objective function \eqref{eq:loss} turns to be strongly convex. Therefore, the strongly convex property guarantees that SMTLe can converge at the rate of $O(\frac{\log(t)}{t})$ by Sub-Gradient Descent. This promises we can find the optimal transfer parameters effectively (see proof in Appendix \ref{appd:convg}).
-We can also show that this objective function can achieve lower empirical risk compared to no transfer model (see Appendix \ref{appd:proof}). This is very important when the source and target domains are not related.
+As we discussed in Section \ref{sec:prob}, regularizing the transfer parameters could improve the performance of the target model. Moreover, by adding the regularization term, the objective function \eqref{eq:loss} turns to be strongly convex. Therefore, we are able to use sub-gradient descent \cite{boyd2004convex} to guarantee its convergence to be $\mathcal{O}(\log(t)/t)$ optimal in $t$ iterations  (see proof in Appendix \ref{appd:convg}). This promises we can find the optimal transfer parameters effectively.
+We can also show that this objective function can achieve lower empirical risk compared to no transfer model (see Appendix \ref{appd:proof}). This is very important when the source and target domains are not very related.
 
  
 %\subsection{Optimizing the transfer parameter}
